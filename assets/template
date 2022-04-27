@@ -1,0 +1,20 @@
+package {{.package}}
+
+import (
+	"github.com/EDEN45/misqlx/pkg/migrant"
+	"github.com/jmoiron/sqlx"
+)
+
+func init(){
+	migrant.RegisterMigration(&{{.struct_name}}{})
+}
+
+type {{.struct_name}} struct{}
+
+func (m *{{.struct_name}}) Up(tx *sqlx.Tx, log migrant.Logger) error{
+    panic("implement me")
+}
+
+func (m *{{.struct_name}}) Down(tx *sqlx.Tx, log migrant.Logger) error{
+    panic("implement me")
+}
