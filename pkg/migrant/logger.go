@@ -8,8 +8,8 @@ const (
 )
 
 type Logger interface {
-	Infof(template string, args ...interface{})
-	Errorf(template string, args ...interface{})
+	Info(template string, args ...interface{})
+	Error(template string, args ...interface{})
 }
 
 func NewLogger() Logger {
@@ -19,11 +19,11 @@ func NewLogger() Logger {
 type logger struct {
 }
 
-func (l *logger) Infof(template string, args ...interface{}) {
+func (l *logger) Info(template string, args ...interface{}) {
 	l.log(InfoLevel, template, args...)
 }
 
-func (l *logger) Errorf(template string, args ...interface{}) {
+func (l *logger) Error(template string, args ...interface{}) {
 	l.log(ErrorLevel, template, args...)
 }
 

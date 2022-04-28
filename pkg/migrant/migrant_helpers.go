@@ -21,7 +21,7 @@ func (m *migrant) checkMigrationTable() {
 	}
 
 	if tableName != m.TableName {
-		m.Log.Infof("Init table: %v", m.Config.TableName)
+		m.Log.Info("Init table: %v", m.Config.TableName)
 		_, err := m.db.Exec(fmt.Sprintf(createMigrationTableQuery, DefaultMigrationTableName))
 		if err != nil {
 			panic(err)

@@ -39,7 +39,7 @@ func NewMigrant(db *sqlx.DB, cfg *Config) Migrant {
 		cfg.TableName = DefaultMigrationTableName
 	}
 	if db == nil {
-		cfg.Log.Errorf("Empty dp connection")
+		cfg.Log.Error("Empty dp connection")
 		return nil
 	}
 
@@ -55,7 +55,7 @@ func (m *migrant) Logger() Logger {
 
 // UpMigrations - Up all migrations
 func (m *migrant) UpMigrations() error {
-	m.Log.Infof("Start migrations")
+	m.Log.Info("Start migrations")
 
 	m.checkMigrationTable()
 
@@ -75,15 +75,15 @@ func (m *migrant) UpMigrations() error {
 				return fmt.Errorf("save migration: %v, err: %+v", migration.Name, err)
 			}
 			tx.Commit()
-			m.Log.Infof("success: %+v", migration.Name)
+			m.Log.Info("success: %+v", migration.Name)
 			successCnt++
 		}
 	}
 
 	if successCnt > 0 {
-		m.Log.Infof("All migrations are done success!")
+		m.Log.Info("All migrations are done success!")
 	} else {
-		m.Log.Infof("Nothing to migrate.")
+		m.Log.Info("Nothing to migrate.")
 	}
 
 	return nil
@@ -124,7 +124,7 @@ func (m *migrant) DownConcreteMigration(name string) error {
 		return errors.New("Does not exist migration with name: " + name)
 	}
 
-	m.Log.Infof("Start down migration: %s", name)
+	m.Log.Info("Start down migration: %s", name)
 
 	tx, err := m.db.Beginx()
 	if err := mig.Down(tx, m.Log); err != nil {
@@ -146,7 +146,7 @@ func (m *migrant) DownConcreteMigration(name string) error {
 	}
 	tx.Commit()
 
-	m.Log.Infof("Migration: %s is down finish!", name)
+	m.Log.Info("Migration: %s is down finish!", name)
 
 	return nil
 }
@@ -155,7 +155,7 @@ func (m *migrant) MakeFileMigration(name string) error {
 	migrationsPath := m.Config.MigrationsDir
 
 	if _, err := os.Stat(migrationsPath); os.IsNotExist(err) {
-		m.Log.Infof("Create new directory : %v", migrationsPath)
+		m.Log.Info("Create new directory : %v", migrationsPath)
 		if err := os.MkdirAll(migrationsPath, os.ModePerm); err != nil {
 			return err
 		}
@@ -195,7 +195,7 @@ func (m *migrant) MakeFileMigration(name string) error {
 		return err
 	}
 
-	m.Log.Infof("migration file created: %v", realName)
+	m.Log.Info("migration file created: %v", realName)
 
 	return nil
 }
