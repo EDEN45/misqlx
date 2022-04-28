@@ -99,7 +99,7 @@ func getTemplate() (*template.Template, error) {
 		return nil, fmt.Errorf("Template caller")
 	}
 
-	tmpl, err := template.ParseFiles(path.Dir(filename) + "/../../assets/template")
+	tmpl, err := template.ParseFiles(path.Dir(filename) + "/../assets/template")
 	if err != nil {
 		return nil, fmt.Errorf("parse template : %v", err)
 	}

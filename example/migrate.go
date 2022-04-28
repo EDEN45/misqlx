@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/EDEN45/misqlx/example/config"
-	"github.com/EDEN45/misqlx/pkg/migrant"
+	migrant2 "github.com/EDEN45/misqlx/migrant"
 	"github.com/jmoiron/sqlx"
 	"path"
 	"runtime"
@@ -20,11 +20,11 @@ func main() {
 
 	_, file, _, _ := runtime.Caller(0)
 	curDir := path.Dir(file)
-	mg := migrant.NewMigrant(db, &migrant.Config{
+	mg := migrant2.NewMigrant(db, &migrant2.Config{
 		MigrationsDir: curDir + "/migrations",
 		TableName:     "migrations",
-		Log:           migrant.NewLogger(),
+		Log:           migrant2.NewLogger(),
 	})
 
-	migrant.Run(mg)
+	migrant2.Run(mg)
 }
