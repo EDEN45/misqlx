@@ -5,6 +5,8 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
+// File name: {{.file_name}}
+
 func init(){
 	migrant.RegisterMigration(&{{.struct_name}}{})
 }

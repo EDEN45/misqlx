@@ -9,14 +9,13 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=postgres
-      - PGPASSWORD=postgres
     volumes:
-      - ./docker/postgres-init.sql:/docker-entrypoint-initdb.d/init.sql
-      - ./docker/data/postgres:/var/lib/postgresql/data
+      - ./docker/misqlx/postgres-init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ${DOCKER_PROJECT_PATH}/misqlx/data/postgres:/var/lib/postgresql/data
 
-  migrant:
-    build:
-      context: ./
-      dockerfile: docker/migrant.Dockerfile
-    container_name: migrant
-    command: ["./migrate"]
+#  migrant:
+#    build:
+#      context: ./
+#      dockerfile: docker/migrant.Dockerfile
+#    container_name: migrant
+#    command: ["./migrate"]

@@ -21,7 +21,7 @@ func main() {
 	_, file, _, _ := runtime.Caller(0)
 	curDir := path.Dir(file)
 	mg := migrant2.NewMigrant(db, &migrant2.Config{
-		MigrationsDir: curDir + "/migrations",
+		MigrationsDir: curDir + "/../../migrations_1",
 		TableName:     "migrations",
 		Log:           migrant2.NewLogger(),
 	})

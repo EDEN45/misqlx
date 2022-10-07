@@ -189,7 +189,7 @@ func (m *migrant) MakeFileMigration(name string) error {
 	if err != nil {
 		return err
 	}
-	err = tmpl.Execute(f, map[string]interface{}{"struct_name": structName, "package": packageName})
+	err = tmpl.Execute(f, map[string]interface{}{"struct_name": structName, "package": packageName, "file_name": realName})
 
 	if err != nil {
 		return err
