@@ -53,7 +53,7 @@ func (m *migrant) getNewMigrations() []migrationModel {
 		}
 
 		var rows []*migrationModel
-		err := m.db.Select(&rows, m.findFirstQuery(), pq.Array(chunkNames))
+		err := m.db.Select(&rows, m.findMigrationsQuery(), pq.Array(chunkNames))
 		if err != nil {
 			panic(err)
 		}
