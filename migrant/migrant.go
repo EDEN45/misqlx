@@ -178,8 +178,10 @@ func (m *migrant) MakeFileMigration(name string) error {
 
 	partsName := strings.Split(name, "_")
 	structName := "migration"
+	queryName := "query"
 	for _, p := range partsName {
 		structName += strings.Title(p)
+		queryName += strings.Title(p)
 	}
 
 	partsDir := strings.Split(m.Config.MigrationsDir, "/")
@@ -189,7 +191,12 @@ func (m *migrant) MakeFileMigration(name string) error {
 	if err != nil {
 		return err
 	}
-	err = tmpl.Execute(f, map[string]interface{}{"struct_name": structName, "package": packageName, "file_name": realName})
+	err = tmpl.Execute(f, map[string]interface{}{
+		"struct_name": structName,
+		"package":     packageName,
+		"file_name":   realName,
+		"query_name":  queryName,
+	})
 
 	if err != nil {
 		return err

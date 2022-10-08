@@ -7,6 +7,10 @@ import (
 
 // File name: {{.file_name}}
 
+var {{.query_name}}Up = ``
+
+var {{.query_name}}Down = ``
+
 func init(){
 	migrant.RegisterMigration(&{{.struct_name}}{})
 }
@@ -15,8 +19,12 @@ type {{.struct_name}} struct{}
 
 func (m *{{.struct_name}}) Up(tx *sqlx.Tx, log migrant.Logger) error{
     panic("implement me")
+    _, err := tx.Exec({{.query_name}}Up)
+        return err
 }
 
 func (m *{{.struct_name}}) Down(tx *sqlx.Tx, log migrant.Logger) error{
     panic("implement me")
+    _, err := tx.Exec({{.query_name}}Down)
+    return err
 }
